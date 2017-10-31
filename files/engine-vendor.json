@@ -2,7 +2,7 @@
     "comment": " This config file uses default settings for all but the required values see README.md for docs",
     "id": "default",
     "description": "Default settings",
-    "engineFactory": "com.actionml.RecommendationEngine",
+    "engineFactory": "org.template.RecommendationEngine",
     "datasource": {
         "params": {
             "name": "sample-handmade-data.txt",
