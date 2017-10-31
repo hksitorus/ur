@@ -7,8 +7,7 @@ RUN mkdir -p /root/.m2/repository
 ADD files/repo /root/.m2/repository
 
 # clone ur
-RUN mkdir -p /ur && cd /ur && git clone https://github.com/hksitorus/universal-recommender.git vendor && \
-    cd /ur/vendor && git checkout bs
+RUN mkdir -p /ur && cd /ur && git clone -b bs --single-branch https://github.com/hksitorus/universal-recommender.git vendor
 
 ADD files/engine-vendor.json /ur/vendor/engine.json
 ADD files/run /ur/run
