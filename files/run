@@ -1,0 +1,35 @@
+#!/bin/bash
+
+PIO_EVENTSERVER_HOSTNAME=127.0.0.1
+PIO_EVENTSERVER_ACCESS_KEY=
+PIO_EVENTSERVER_PORT=80
+UR_DIR=/ur
+
+if [ $# -eq 1 ]; then
+    echo "ur $1 [ build | train ]"
+elif [ $# -eq 2 ]; then
+    if [ -d $UR_DIR ]; then
+        if [ "$2" == "build" ]; then
+            if [ -d ${UR_DIR}/$1 ]; then
+                echo "build $1"
+                cd $UR_DIR/$1 && pio build --verbose
+            else
+                echo "Not a directory ${UR_DIR}/${1}"
+            fi
+        elif [ "$2" == "train" ]; then
+            if [ -d ${UR_DIR}/vendor ]; then
+                echo "train $1"
+                PIO_EVENTSERVER_APP_NAME=$1
+                cd $UR_DIR/$1 && pio train -- --driver-memory 8g --executor-memory 8g
+            else
+                echo "Not a directory ${UR_DIR}/${1}"
+            fi
+        else
+            echo "ur $1 [ build | train ]"
+        fi
+    else
+        echo "Not a directory ${UR_DIR}"
+    fi
+else
+    echo "ur [ vendor ] [ build | train ]"
+fi

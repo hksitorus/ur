@@ -11,6 +11,8 @@ RUN mkdir -p /ur && cd /ur && git clone https://github.com/hksitorus/universal-r
     cd /ur/vendor && git checkout bs
 
 ADD files/engine-vendor.json /ur/vendor/engine.json
+ADD files/run /ur/run
+RUN chmod +x /ur/run
 RUN cd /ur/vendor/ && pio build --verbose
 
 # clean up apt
